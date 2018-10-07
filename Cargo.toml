@@ -1,0 +1,12 @@
+[package]
+name = "ticket-py"
+version = "0.1.0"
+authors = ["Hanaasagi <ambiguous404@gmail.com>"]
+
+[lib]
+name = "ticket"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3 = { version = "0.4", features = ["extension-module"] }
+ticket = { git = "https://github.com/Hanaasagi/ticket" }
