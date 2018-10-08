@@ -13,6 +13,7 @@ struct Ticketing {
     ticketing: RefCell<ticket::Ticketing>
 }
 
+
 impl Ticketing {
     fn new() -> Self {
         Self {
@@ -20,6 +21,7 @@ impl Ticketing {
         }
     }
 }
+
 
 #[pymethods]
 impl Ticketing {
@@ -41,21 +43,21 @@ fn encode(id: Vec<u8>) -> String {
     ticket::encode(ticket::ID::new(arr))
 }
 
+
 #[pyfunction]
 fn decode(id: String) -> Vec<u8> {
     ticket::decode(&id).as_bytes().to_vec()
-
 }
+
 
 fn copy_memory(src: &[u8], dst: &mut [u8]) {
     let len_src = src.len();
     assert!(dst.len() >= len_src);
     unsafe {
-        ptr::copy_nonoverlapping(src.as_ptr(),
-                                 dst.as_mut_ptr(),
-                                 len_src);
+        ptr::copy_nonoverlapping(src.as_ptr(), dst.as_mut_ptr(), len_src);
     }
 }
+
 
 #[pymodinit]
 fn ticket(_py: Python, m: &PyModule) -> PyResult<()> {
